@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Define the base directory where your app folders are located
+#base_dir="./apps" # Assuming you have an "apps" folder in the same directory as the script
+base_dir="D:/mI5/adb-fastboot/adb-fastboot"
+
+# --- App One ---
+app_one_dir="$base_dir/app_one"
+echo "Installing App One from: $app_one_dir"
+if cd "$app_one_dir"; then
+    adb install-multiple base.apk split_config.arm64_v8a.apk split_config.en.apk
+    cd .. # Go back to the script's directory
+else
+    echo "Error: Could not access directory: $app_one_dir"
+fi
+echo ""
+
+# --- App Two ---
+app_two_dir="$base_dir/app_two"
+echo "Installing App Two from: $app_two_dir"
+if cd "$app_two_dir"; then
+    adb install-multiple base.apk split_config.armeabi_v7a.apk split_config.fr.apk
+    cd ..
+else
+    echo "Error: Could not access directory: $app_two_dir"
+fi
+echo ""
+
+echo "Installation process completed."
